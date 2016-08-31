@@ -1,0 +1,6 @@
+namespace CharityKitchen {
+public partial class Clients {
+      public void Page_Load(){
+      }
+}
+}
