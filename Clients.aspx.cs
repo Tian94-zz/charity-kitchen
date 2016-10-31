@@ -49,11 +49,18 @@ namespace CharityKitchen
         #region methods
         protected void AddStatesToDropDown()
         {
-            CharityKitchenServiceReference.CKServiceSoapClient svc = new CharityKitchenServiceReference.CKServiceSoapClient();
-            drpState.DataSource = svc.GetStateList();
-            drpState.DataTextField = "StateName";
-            drpState.DataValueField = "StateID";
-            drpState.DataBind();
+            try
+            {
+                CharityKitchenServiceReference.CKServiceSoapClient svc = new CharityKitchenServiceReference.CKServiceSoapClient();
+                drpState.DataSource = svc.GetStateList();
+                drpState.DataTextField = "StateName";
+                drpState.DataValueField = "StateID";
+                drpState.DataBind();
+            }
+            catch (Exception ex)
+            {
+                lblInfo.Text = ex.ToString();
+            }
         }
 
         protected void AddClientsToTable()
@@ -66,9 +73,20 @@ namespace CharityKitchen
         protected void AddClientToDB()
         {
             int state = drpState.SelectedIndex;
-            DateTime dt = Convert.ToDateTime(txtDOB.Text);
+
             CharityKitchenServiceReference.CKServiceSoapClient svc = new CharityKitchenServiceReference.CKServiceSoapClient();
-            svc.AddNewClient(txtFirstName.Text, txtLastName.Text, dt, txtPhoneNumber.Text, txtEmail.Text, txtAddress.Text, state, txtSuburb.Text, txtPostcode.Text);
+            try 
+            {                
+                svc.AddNewClient(txtFirstName.Text, txtLastName.Text, Convert.ToDateTime(txtDOB.Text), txtPhoneNumber.Text, txtEmail.Text, txtAddress.Text, state, txtSuburb.Text, txtPostcode.Text);
+                lblInfo.ForeColor = System.Drawing.Color.Green;
+                lblInfo.Text = "*Client successfully added";
+            }
+            catch
+            {
+                lblInfo.ForeColor = System.Drawing.Color.Red;
+                lblInfo.Text = "*Please check all fields are entered correctly.";
+            }
+            
         }
 
         protected void ClearFields()
@@ -113,5 +131,12 @@ namespace CharityKitchen
         }
         #endregion methods
 
+
+        protected void btnShowHelp_Click(object sender, EventArgs e)
+        {
+            txtHelp.Visible = true;
+            HelpStrings help = new HelpStrings();
+            txtHelp.Text = help.Clients;
+        }
     }
 }

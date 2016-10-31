@@ -1,0 +1,41 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="CharityKitchen.Master.cs" Inherits="CharityKitchen.CharityKitchenItem" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>CHARITY KITCHEN</title>
+    <link href="~/Styles/Master.css" rel="stylesheet" type="text/css" media="screen" runat="server" />    
+</head>
+<body>
+    <form id="formMain" runat="server">
+        <div>           
+        <asp:Image ID="HeadImage" src="/Images/CharityKitchenHeader.png" runat="server"/>
+    </div>
+    <div>
+        <asp:SiteMapDataSource ID="SiteMapDataSource1" runat="server" />
+            <asp:SiteMapPath ID="SiteMapPath1" runat="server" Font-Names="Verdana" Font-Size="0.8em" PathSeparator=" : ">
+                <CurrentNodeStyle ForeColor="#333333" />
+                <NodeStyle Font-Bold="True" ForeColor="#284E98" />
+                <PathSeparatorStyle Font-Bold="True" ForeColor="#507CD1" />
+                <RootNodeStyle Font-Bold="True" ForeColor="#507CD1" />
+            </asp:SiteMapPath>
+        
+        <ul class="PrimaryMenu">
+            <li><a runat="server" href="Default.aspx">Home</a></li>
+            <li><a runat="server" href="Clients.aspx">Clients</a></li>
+            <li><a runat="server" href="Stock.aspx">Stock</a></li>
+            <li><a runat="server" href="Meals.aspx">Meals</a></li>
+            <li><a runat="server" href="Orders.aspx">Orders</a></li>
+            <li><a runat="server" href="Kitchen.aspx">Kitchen</a></li>
+            <li><a runat="server" href="Deliveries.aspx">Deliveries</a></li>
+            <li style="padding-left:15px"><asp:Button runat="server" ID="btnLogOut" Text="Log Out" OnClick="btnLogOut_Click"/></li>
+        </ul>
+    </div>
+    <div class="container">
+    <asp:ContentPlaceHolder ID="body" runat="server">         
+    </asp:ContentPlaceHolder>
+    </div>
+    </form>
+</body>
+</html>
